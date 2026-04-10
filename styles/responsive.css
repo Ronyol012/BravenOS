@@ -1,0 +1,172 @@
+/* =============================================================
+   responsive.css — Estilos para diferentes tamaños de pantalla
+   
+   Aquí ajustamos el diseño para que se vea bien en móviles,
+   tablets y escritorio. Usamos el enfoque "mobile-first":
+   primero pensamos en el móvil, luego en pantallas más grandes.
+   ============================================================= */
+
+/* ── Tablets y pantallas medianas (hasta 1080px) ─────────── */
+@media (max-width: 1080px) {
+  /* Nav */
+  nav { padding: 0 24px; }
+  .nav__links { display: none; }
+  .nav__hamburguesa { display: flex; }
+
+  /* Secciones */
+  .seccion { padding: 88px 24px; }
+
+  /* Hero */
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__izquierda { border-right: none; border-bottom: 1px solid var(--color-rule); padding: 48px 24px 40px; }
+  .hero__derecha { padding: 32px 24px 48px; }
+  .hero__pie { padding: 18px 24px; }
+
+  /* Manifesto */
+  .manifesto__inner { grid-template-columns: 1fr; min-height: auto; }
+  .manifesto__texto { border-right: none; border-bottom: 1px solid var(--color-rule); padding: 64px 44px; }
+  .manifesto__stats { grid-template-columns: 1fr 1fr; }
+
+  /* Servicios y pricing */
+  .servicios__cabecera, .pricing__cabecera { grid-template-columns: 1fr; gap: 20px; }
+
+  /* Proyectos */
+  .proyectos__cabecera { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .proyecto { grid-template-columns: 1fr; min-height: auto; }
+  .proyecto--espejo { direction: ltr; }
+  .proyecto__info { border-right: none; border-bottom: 1px solid var(--color-rule); padding: 40px 24px; }
+  .proyecto--espejo .proyecto__info { border-left: none; border-bottom: 1px solid var(--color-rule); }
+  .proyecto__visual { min-height: 260px; }
+  .proyecto__numero-bg { display: none; }
+
+  /* Pricing */
+  .planes__grid { grid-template-columns: 1fr 1fr; }
+  .plan:nth-child(even) { border-right: none; }
+  .plan:nth-child(1), .plan:nth-child(2) { border-bottom: 1px solid var(--color-rule); }
+
+  /* Proceso */
+  .proceso__grid { grid-template-columns: 1fr 1fr; }
+  .paso:nth-child(even) { border-right: none; }
+  .paso:nth-child(1), .paso:nth-child(2) { border-bottom: 1px solid var(--color-rule); }
+
+  /* Valores */
+  .valores__grid { grid-template-columns: repeat(3,1fr); }
+  .valor:nth-child(3n) { border-right: none; }
+  .valor:nth-child(-n+3) { border-bottom: 1px solid rgba(240,241,240,.07); }
+
+  /* Testimonios */
+  .testimonios__grid { grid-template-columns: 1fr; }
+  .testimonios__aside { border-bottom: 1px solid rgba(240,241,240,.1); }
+
+  /* Quiz */
+  .quiz__cabecera { grid-template-columns: 1fr; gap: 20px; }
+  .quiz__paso, .quiz__resultado { padding: 40px 32px; }
+  .quiz__resultado.activo { flex-direction: column; }
+  .quiz__res-tarjeta { width: 100%; }
+
+  /* Formulario */
+  .contacto__grid { grid-template-columns: 1fr; gap: 44px; }
+  .contacto__izquierda { position: static; }
+
+  /* CTA */
+  .cta__grid { grid-template-columns: 1fr; gap: 44px; padding: 88px 32px; }
+
+  /* Footer */
+  .footer__columnas { grid-template-columns: 1fr 1fr; gap: 40px; }
+  footer { padding: 64px 24px 32px; }
+
+  /* Botones flotantes */
+  .boton-flotante { display: none; } /* en mobile el WA lo reemplaza */
+}
+
+/* ── Móviles (hasta 768px) ────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Nav */
+  .nav { height: 58px; padding: 0 20px; }
+  .menu-mobile { top: 58px; }
+  .boton-control { padding: 4px 8px; font-size: 9.5px; }
+  .boton-nav { padding: 7px 14px; font-size: 12px; }
+
+  /* Secciones */
+  .seccion { padding: 64px 20px; }
+
+  /* Hero */
+  .hero__izquierda { padding: 36px 20px; }
+  .hero__derecha { padding: 24px 20px 40px; }
+  .hero__fondo-texto { display: none; }
+  .hero__ctas { flex-direction: column; align-items: stretch; }
+  .hero__ctas .btn { justify-content: center; }
+
+  /* Manifesto */
+  .manifesto__texto { padding: 56px 24px; }
+  .stat-celda { padding: 28px 20px; }
+
+  /* Servicios */
+  .servicio { grid-template-columns: 40px 1fr 20px; padding: 22px 0; }
+  .servicio__nombre { font-size: 19px; }
+
+  /* Proyectos */
+  .proyecto__info { padding: 32px 20px; }
+  .proyecto__visual { min-height: 200px; }
+
+  /* Pricing */
+  .selector-moneda { width: 100%; }
+  .selector-moneda__btn { flex: 1; text-align: center; }
+  .planes__grid { grid-template-columns: 1fr; }
+  .plan { border-right: none !important; border-bottom: 1px solid var(--color-rule) !important; }
+  .plan:last-child { border-bottom: none !important; }
+
+  /* Proceso */
+  .proceso__grid { grid-template-columns: 1fr; }
+  .paso { border-right: none !important; border-bottom: 1px solid var(--color-rule) !important; }
+  .paso:last-child { border-bottom: none !important; }
+
+  /* Valores */
+  .valores__grid { grid-template-columns: 1fr 1fr; }
+  .valor { border-bottom: 1px solid rgba(240,241,240,.07) !important; }
+  .valor:nth-child(odd)  { border-right: 1px solid rgba(240,241,240,.07) !important; }
+  .valor:nth-child(even) { border-right: none !important; }
+  .valor:nth-last-child(-n+2) { border-bottom: none !important; }
+
+  /* Testimonios */
+  .testimonio { padding: 28px 24px; }
+
+  /* FAQ */
+  .faq__pregunta { padding: 18px 20px; }
+  .faq__respuesta { padding: 0 20px 18px; }
+
+  /* Quiz */
+  .quiz__paso, .quiz__resultado { padding: 32px 24px; }
+  .quiz__opciones, .quiz__opciones--3col { grid-template-columns: 1fr !important; }
+
+  /* Formulario */
+  .form__fila { grid-template-columns: 1fr; }
+  .form__presupuesto-btn { flex: 1; }
+
+  /* CTA */
+  .cta__grid { padding: 64px 20px; }
+  .cta__botones { flex-direction: column; align-items: stretch; }
+  .cta__botones .btn { justify-content: center; }
+
+  /* Footer */
+  .footer__columnas { grid-template-columns: 1fr; gap: 32px; }
+  .footer__pie { flex-direction: column; gap: 14px; text-align: center; }
+  .footer__legal { flex-wrap: wrap; justify-content: center; }
+}
+
+/* ── Móviles pequeños (hasta 480px) ──────────────────────── */
+@media (max-width: 480px) {
+  .nav { padding: 0 16px; }
+  .seccion { padding: 56px 16px; }
+  .hero__izquierda { padding: 32px 16px; }
+  .hero__derecha { padding: 20px 16px 36px; }
+  .hero__palabra-serif { font-size: clamp(48px, 12vw, 64px); }
+  .hero__palabra-sans  { font-size: clamp(46px, 11.5vw, 62px); }
+  .selector-moneda { flex-wrap: wrap; }
+  .valores__grid { grid-template-columns: 1fr; }
+  .valor { border-right: none !important; border-bottom: 1px solid rgba(240,241,240,.07) !important; }
+  .valor:last-child { border-bottom: none !important; }
+  .cta__grid { padding: 56px 16px; }
+  footer { padding: 48px 16px 28px; }
+  .quiz__cabecera { padding: 0; }
+}

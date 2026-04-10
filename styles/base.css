@@ -1,0 +1,85 @@
+/* =============================================================
+   base.css — Reset y estilos base del sitio
+   
+   Aquí quitamos los estilos por defecto del navegador y
+   definimos las reglas que aplican a todo el sitio.
+   ============================================================= */
+
+/* Reset universal: todos los elementos parten de cero */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Scroll suave al hacer clic en enlaces de ancla (#seccion) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Estilos del cuerpo principal */
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  background: var(--color-bg);
+  color: var(--color-navy);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased; /* texto más nítido en Mac */
+  transition: background var(--transition-base), color var(--transition-base);
+}
+
+/* Imágenes y videos responsivos por defecto */
+img, video {
+  max-width: 100%;
+  display: block;
+}
+
+/* Links sin subrayado por defecto */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Listas sin viñetas por defecto */
+ul, ol {
+  list-style: none;
+}
+
+/* Botones sin estilos del navegador */
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+  border: none;
+  background: none;
+}
+
+/* Inputs sin estilos raros del navegador */
+input, select, textarea {
+  font-family: var(--font-body);
+}
+
+/* ── Barra de progreso de scroll (parte superior) ─────────── */
+#barraProgreso {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--color-red);
+  z-index: 9999;
+  width: 0%;
+  transition: width .08s linear;
+}
+
+/* ── Clases de texto reutilizables ───────────────────────── */
+.texto-acento  { color: var(--color-red); }
+.texto-azul    { color: var(--color-blue); }
+.texto-gris    { color: var(--color-gray); }
+
+/* ── Íconos Lucide (cargados desde CDN) ──────────────────── */
+[data-lucide] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}

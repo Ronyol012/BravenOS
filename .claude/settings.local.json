@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx serve:*)",
+      "Bash(npm list:*)",
+      "Bash(curl -s http://localhost:3000/)",
+      "mcp__5d456e37-d484-4aae-b890-f9b66ea8e899__use_figma"
+    ]
+  }
+}
