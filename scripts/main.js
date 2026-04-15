@@ -213,14 +213,17 @@ function renderizarProyectos(t) {
               <div class="browser__url"></div>
             </div>
             <div class="browser__contenido">
-              <div class="browser__linea browser__linea--navy"></div>
+              ${p.detalle?.portada
+                ? `<img src="${p.detalle.portada}" alt="${p.titulo}" class="browser__portada">`
+                : `<div class="browser__linea browser__linea--navy"></div>
               <div class="browser__linea browser__linea--roja"></div>
               <div class="browser__bloques">
                 <div class="browser__bloque"></div>
                 <div class="browser__bloque"></div>
               </div>
               <div class="browser__linea browser__linea--azul"></div>
-              <div class="browser__linea browser__linea--gris"></div>
+              <div class="browser__linea browser__linea--gris"></div>`
+              }
             </div>
           </div>
         </div>
@@ -382,14 +385,21 @@ function renderizarFooter(t) {
   setText('footC',    t.footC);
   setText('footCopy', t.footCopy);
 
+  // Anclas para cada link de Servicios
+  const anclaServ = ['#servicios', '#servicios', '#planes', '#servicios'];
   const footServ = document.getElementById('footServList');
-  if (footServ) footServ.innerHTML = t.footServicios.map(l => `<li><a href="#">${l}</a></li>`).join('');
+  if (footServ) footServ.innerHTML = t.footServicios.map((l, i) =>
+    `<li><a href="${anclaServ[i] || '#'}">${l}</a></li>`
+  ).join('');
 
+  // Anclas para cada link de Estudio
+  const anclaEst = ['#nosotros', '#proyectos', '#proceso', '#contacto'];
   const footEst = document.getElementById('footEstList');
   if (footEst) {
     footEst.innerHTML = t.footEstudio.map((l, i) => {
-      const estilo = i === t.footEstudio.length - 1 ? ' style="color:var(--color-red);font-weight:700"' : '';
-      return `<li><a href="#"${estilo}>${l}</a></li>`;
+      const esUltimo = i === t.footEstudio.length - 1;
+      const estilo   = esUltimo ? ' style="color:var(--color-red);font-weight:700"' : '';
+      return `<li><a href="${anclaEst[i] || '#'}"${estilo}>${l}</a></li>`;
     }).join('');
   }
 
@@ -479,12 +489,21 @@ window.abrirModalProyecto = function(i) {
   /* Galería de 3 imágenes */
   const galeria = document.getElementById('pmodalGaleria');
   const variants = ['', 'b', 'b'];
+  const imgSrcs  = (d.imgs || ['', '', '']).filter(s => s);   // solo las que tienen src
+
   galeria.innerHTML = (d.imgs || ['', '', '']).map((src, idx) => {
     if (src) {
-      return `<div class="pmodal__img"><img src="${src}" alt="${p.titulo} — imagen ${idx + 1}" loading="lazy"></div>`;
+      return `<div class="pmodal__img"><img src="${src}" alt="${p.titulo} — imagen ${idx + 1}" loading="lazy" data-lb-idx="${imgSrcs.indexOf(src)}"></div>`;
     }
     return `<div class="pmodal__img pmodal__img--placeholder pv--${p.visual}${variants[idx]}">${idx === 0 ? p.num : ''}</div>`;
   }).join('');
+
+  // Bind lightbox al click de cada imagen real
+  galeria.querySelectorAll('img[data-lb-idx]').forEach(img => {
+    img.addEventListener('click', () => {
+      abrirLightbox(imgSrcs, parseInt(img.dataset.lbIdx, 10));
+    });
+  });
 
   /* Textos principales */
   document.getElementById('pmodalEtiqueta').textContent = p.etiqueta;
@@ -547,5 +566,219 @@ window.cerrarModalProyecto = function() {
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('pmodalOverlay')?.addEventListener('click', cerrarModalProyecto);
   document.getElementById('pmodalCerrar')?.addEventListener('click', cerrarModalProyecto);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarModalProyecto(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (document.getElementById('lightbox')?.classList.contains('activo')) {
+        cerrarLightbox();
+      } else {
+        cerrarModalProyecto();
+      }
+    }
+    if (document.getElementById('lightbox')?.classList.contains('activo')) {
+      if (e.key === 'ArrowRight') { _lbZoomReset(); lightboxNavegar(1);  }
+      if (e.key === 'ArrowLeft')  { _lbZoomReset(); lightboxNavegar(-1); }
+      if (e.key === '+' || e.key === '=') _lbZoomBy(0.25);
+      if (e.key === '-')                  _lbZoomBy(-0.25);
+      if (e.key === '0')                  _lbZoomReset();
+    }
+  });
+
+  document.getElementById('lightboxCerrar')?.addEventListener('click', cerrarLightbox);
+  document.getElementById('lightboxPrev')?.addEventListener('click', () => { _lbZoomReset(); lightboxNavegar(-1); });
+  document.getElementById('lightboxNext')?.addEventListener('click', () => { _lbZoomReset(); lightboxNavegar(1); });
+
+  _lbInitInteraction();
 });
+
+/* ══════════════════════════════════════════════════════════════
+   LIGHTBOX — zoom + pan
+══════════════════════════════════════════════════════════════ */
+let _lbSrcs   = [];
+let _lbIdx    = 0;
+let _lbScale  = 1;
+let _lbX      = 0;   // desplazamiento pan X
+let _lbY      = 0;   // desplazamiento pan Y
+let _lbDrag   = false;
+let _lbDragX  = 0;
+let _lbDragY  = 0;
+let _lbBadgeTimer = null;
+
+const LB_MIN = 1;
+const LB_MAX = 6;
+const LB_STEP = 0.3;
+
+function abrirLightbox(srcs, idx) {
+  _lbSrcs = srcs;
+  _lbIdx  = idx;
+  _lbZoomReset(false);
+  _lbRender();
+  document.getElementById('lightbox').classList.add('activo');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarLightbox() {
+  document.getElementById('lightbox')?.classList.remove('activo');
+  _lbZoomReset(false);
+  if (!document.getElementById('proyectoModal')?.classList.contains('abierto')) {
+    document.body.style.overflow = '';
+  }
+}
+
+function lightboxNavegar(dir) {
+  if (!_lbSrcs.length) return;
+  _lbIdx = (_lbIdx + dir + _lbSrcs.length) % _lbSrcs.length;
+  _lbRender();
+}
+
+function _lbRender() {
+  const img     = document.getElementById('lightboxImg');
+  const counter = document.getElementById('lightboxCounter');
+  const prev    = document.getElementById('lightboxPrev');
+  const next    = document.getElementById('lightboxNext');
+
+  img.src = _lbSrcs[_lbIdx];
+  img.alt = `Imagen ${_lbIdx + 1} de ${_lbSrcs.length}`;
+  counter.textContent = `${_lbIdx + 1} / ${_lbSrcs.length}`;
+
+  const showNav = _lbSrcs.length > 1;
+  prev.style.display = showNav ? '' : 'none';
+  next.style.display = showNav ? '' : 'none';
+
+  _lbApplyTransform();
+}
+
+function _lbApplyTransform() {
+  const img    = document.getElementById('lightboxImg');
+  const canvas = document.getElementById('lightboxCanvas');
+  if (!img) return;
+  // Transición suave solo cuando no está arrastrando
+  img.style.transition = _lbDrag ? 'none' : 'transform .18s ease';
+  img.style.transform = `scale(${_lbScale}) translate(${_lbX / _lbScale}px, ${_lbY / _lbScale}px)`;
+  canvas?.classList.toggle('zoomed', _lbScale > 1);
+}
+
+function _lbZoomBy(delta, cx, cy) {
+  const img = document.getElementById('lightboxImg');
+  if (!img) return;
+
+  const prev  = _lbScale;
+  _lbScale    = Math.min(LB_MAX, Math.max(LB_MIN, _lbScale + delta));
+
+  // Si volvemos a 1x, centramos
+  if (_lbScale === 1) { _lbX = 0; _lbY = 0; }
+
+  _lbApplyTransform();
+  _lbShowBadge();
+}
+
+function _lbZoomReset(animate = true) {
+  _lbScale = 1; _lbX = 0; _lbY = 0;
+  _lbApplyTransform();
+  if (animate) _lbShowBadge();
+}
+
+function _lbShowBadge() {
+  const badge = document.getElementById('lightboxZoomBadge');
+  if (!badge) return;
+  badge.textContent = `${Math.round(_lbScale * 100)}%`;
+  badge.classList.add('visible');
+  clearTimeout(_lbBadgeTimer);
+  _lbBadgeTimer = setTimeout(() => badge.classList.remove('visible'), 1200);
+}
+
+function _lbInitInteraction() {
+  const canvas = document.getElementById('lightboxCanvas');
+  const lb     = document.getElementById('lightbox');
+  if (!canvas) return;
+
+  /* ── Rueda del ratón → zoom centrado en cursor ── */
+  canvas.addEventListener('wheel', e => {
+    if (!lb.classList.contains('activo')) return;
+    e.preventDefault();
+    const delta = e.deltaY < 0 ? LB_STEP : -LB_STEP;
+    _lbZoomBy(delta);
+  }, { passive: false });
+
+  /* ── Doble click → reset zoom ── */
+  canvas.addEventListener('dblclick', e => {
+    e.stopPropagation();
+    if (_lbScale > 1) { _lbZoomReset(); }
+    else { _lbZoomBy(1.5); }
+  });
+
+  /* ── Drag para pan (solo cuando zoom > 1) ── */
+  canvas.addEventListener('mousedown', e => {
+    if (e.button !== 0) return;
+    if (_lbScale <= 1) return;
+    _lbDrag  = true;
+    _lbDragX = e.clientX - _lbX;
+    _lbDragY = e.clientY - _lbY;
+    canvas.classList.add('dragging');
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!_lbDrag) return;
+    _lbX = e.clientX - _lbDragX;
+    _lbY = e.clientY - _lbDragY;
+    _lbApplyTransform();
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!_lbDrag) return;
+    _lbDrag = false;
+    document.getElementById('lightboxCanvas')?.classList.remove('dragging');
+  });
+
+  /* ── Touch: pinch zoom + pan ── */
+  let _touches = [];
+  let _pinchDist0 = 0;
+  let _scale0     = 1;
+  let _panX0 = 0, _panY0 = 0, _touchX0 = 0, _touchY0 = 0;
+
+  canvas.addEventListener('touchstart', e => {
+    _touches = Array.from(e.touches);
+    if (_touches.length === 2) {
+      _pinchDist0 = Math.hypot(
+        _touches[0].clientX - _touches[1].clientX,
+        _touches[0].clientY - _touches[1].clientY
+      );
+      _scale0 = _lbScale;
+    } else if (_touches.length === 1 && _lbScale > 1) {
+      _panX0   = _lbX;
+      _panY0   = _lbY;
+      _touchX0 = _touches[0].clientX;
+      _touchY0 = _touches[0].clientY;
+    }
+    e.preventDefault();
+  }, { passive: false });
+
+  canvas.addEventListener('touchmove', e => {
+    _touches = Array.from(e.touches);
+    if (_touches.length === 2) {
+      const dist = Math.hypot(
+        _touches[0].clientX - _touches[1].clientX,
+        _touches[0].clientY - _touches[1].clientY
+      );
+      _lbScale = Math.min(LB_MAX, Math.max(LB_MIN, _scale0 * (dist / _pinchDist0)));
+      if (_lbScale === 1) { _lbX = 0; _lbY = 0; }
+      _lbApplyTransform();
+      _lbShowBadge();
+    } else if (_touches.length === 1 && _lbScale > 1) {
+      _lbX = _panX0 + (_touches[0].clientX - _touchX0);
+      _lbY = _panY0 + (_touches[0].clientY - _touchY0);
+      _lbApplyTransform();
+    }
+    e.preventDefault();
+  }, { passive: false });
+
+  canvas.addEventListener('touchend', e => {
+    _touches = Array.from(e.touches);
+    if (_lbScale < 1.05) _lbZoomReset();
+  });
+
+  /* ── Click en fondo negro (no en imagen) → cerrar ── */
+  lb.addEventListener('click', e => {
+    if (e.target === lb) cerrarLightbox();
+  });
+}

@@ -281,6 +281,15 @@
 .browser__punto--verde { background: #28c840; }
 .browser__url { flex: 1; max-width: 140px; margin: 0 8px; height: 11px; background: rgba(18,24,42,.07); border-radius: 3px; }
 .browser__contenido { padding: 14px; display: flex; flex-direction: column; gap: 7px; }
+.browser__portada {
+  width: calc(100% + 28px);
+  margin: -14px;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+  height: 220px;
+  border-radius: 0 0 4px 4px;
+}
 .browser__linea { height: 6px; border-radius: 3px; }
 .browser__linea--navy  { background: linear-gradient(90deg,#12182a,#2a3654); }
 .browser__linea--roja  { background: linear-gradient(90deg,#ea6969,#ef8585); width: 60%; }
@@ -1128,6 +1137,136 @@
   transition: transform .4s ease;
 }
 .pmodal__img:hover img { transform: scale(1.04); }
+.pmodal__img img { cursor: zoom-in; }
+
+/* ── LIGHTBOX ──────────────────────────────────────────────── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.92);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .28s ease;
+  overflow: hidden;
+}
+.lightbox.activo {
+  opacity: 1;
+  pointer-events: all;
+}
+/* wrapper que se escala y arrastra */
+.lightbox__canvas {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  touch-action: none;
+  overflow: hidden;
+}
+.lightbox__canvas.dragging { cursor: grabbing; }
+.lightbox__canvas.zoomed   { cursor: grab; }
+.lightbox__img {
+  max-width: 90vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 32px 80px rgba(0,0,0,.6);
+  transform-origin: center center;
+  transform: scale(.92);
+  transition: transform .32s cubic-bezier(.22,1,.36,1);
+  user-select: none;
+  pointer-events: none; /* el drag lo maneja el canvas */
+  will-change: transform;
+}
+.lightbox.activo .lightbox__img {
+  transform: scale(1);
+}
+/* hint de zoom */
+.lightbox__zoom-hint {
+  position: absolute;
+  bottom: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,.45);
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: .05em;
+  pointer-events: none;
+  transition: opacity .3s;
+}
+.lightbox__zoom-badge {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s;
+}
+.lightbox__zoom-badge.visible { opacity: 1; }
+.lightbox__cerrar {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s;
+  backdrop-filter: blur(4px);
+}
+.lightbox__cerrar:hover { background: rgba(255,255,255,.22); }
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s;
+  backdrop-filter: blur(4px);
+}
+.lightbox__nav:hover { background: rgba(255,255,255,.24); }
+.lightbox__nav--prev { left: 24px; }
+.lightbox__nav--next { right: 24px; }
+.lightbox__counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,.55);
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: .04em;
+}
 .pmodal__img--placeholder {
   display: flex;
   align-items: center;
