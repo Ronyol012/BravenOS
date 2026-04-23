@@ -37,7 +37,7 @@ export const SIMBOLOS = {
 
 /* ── Contacto ─────────────────────────────────────────────── */
 export const WA_NUMERO  = '18298052619';
-export const EMAIL      = ' web@bravenweb.com';
+export const EMAIL      = 'bravenweb@gmail.com';
 export const DOMINIO    = 'https://bravenweb.com';
 
 /* ── Mensaje pre-llenado para WhatsApp ───────────────────── */
