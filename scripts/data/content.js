@@ -63,25 +63,6 @@ export const CONTENIDO = {
     pjModalCta: 'Empezar un proyecto similar →',
     proyectos: [
       {
-        num: '01', visual: 1, espejo: false,
-        etiqueta: '01 · Braven Studio · 2025',
-        titulo:   'Este mismo sitio web',
-        cita:     '"El primer proyecto: construir nuestra propia presencia digital."',
-        desc:     'Diseño y desarrollo del sitio web de Braven Studio. UX/UI en Figma, HTML/CSS/JS puro, deploy en Netlify. El stack que usamos para todos nuestros clientes.',
-        tags:     ['UX/UI', 'HTML/CSS/JS', 'Netlify'],
-        detalle: {
-          rol:       'Diseño & Desarrollo',
-          año:       '2025',
-          duracion:  '3 días',
-          cliente:   'Braven Studio (interno)',
-          imgs:      ['', '', ''],
-          resumen:   'El sitio de Braven es al mismo tiempo nuestro portafolio y nuestra mejor carta de presentación. Cada decisión de diseño responde a los mismos principios que aplicamos para nuestros clientes: claridad visual, velocidad de carga y conversión.',
-          retos:     ['Construir credibilidad desde cero sin historial de clientes', 'Sistema de idiomas (ES/EN) sin framework', 'Dark mode completo con variables CSS', 'Animaciones de scroll que no afectan el rendimiento'],
-          resultado: ['Deploy en Netlify en menos de 3 días', 'Score 95+ en Lighthouse', 'Sistema multiidioma y multitema 100% nativo', 'Base reutilizable para todos los proyectos futuros'],
-          stack:     ['Figma', 'HTML5', 'CSS3', 'JavaScript ES6', 'Netlify'],
-        },
-      },
-      {
         num: '02', visual: 2, espejo: true,
         etiqueta: '02 · Portafolio Fotográfico',
         titulo:   'Portafolio de Valentina Cruz',
@@ -341,19 +322,6 @@ export const CONTENIDO = {
     pjModalRetos: 'Challenges', pjModalResultado: 'Results', pjModalStack: 'Stack',
     pjModalCta: 'Start a similar project →',
     proyectos: [
-      {
-        num: '01', visual: 1, espejo: false, etiqueta: '01 · Braven Studio · 2025', titulo: 'This very website',
-        cita: '"First project: building our own digital presence."',
-        desc: 'Design and development of the Braven Studio website. UX/UI in Figma, pure HTML/CSS/JS, deployed on Netlify.',
-        tags: ['UX/UI', 'HTML/CSS/JS', 'Netlify'],
-        detalle: {
-          rol: 'Design & Development', año: '2025', duracion: '3 days', cliente: 'Braven Studio (internal)',
-          resumen: 'The Braven site is both our portfolio and our best pitch. Every design decision follows the same principles we apply for clients: visual clarity, load speed, and conversion.',
-          retos: ['Build credibility from scratch with no client history', 'Bilingual system (ES/EN) without a framework', 'Full dark mode with CSS variables', 'Scroll animations with no performance hit'],
-          resultado: ['Deployed on Netlify in under 3 days', '95+ Lighthouse score', 'Native multilingual and multi-theme system', 'Reusable base for all future projects'],
-          stack: ['Figma', 'HTML5', 'CSS3', 'JavaScript ES6', 'Netlify'],
-        },
-      },
       {
         num: '02', visual: 2, espejo: true, etiqueta: '02 · Coming soon', titulo: 'Client portfolio · 2025',
         cita: '"More projects on the way."',
