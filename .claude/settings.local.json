@@ -12,7 +12,12 @@
       "mcp__Claude_in_Chrome__tabs_context_mcp",
       "Bash(timeout 90 bash -c 'for i in {1..9}; do sleep 10; echo \"Checking... ${i}0s\"; done')",
       "mcp__09c02a88-dbb3-4d7a-8f9c-2bc0cbc60678__netlify-deploy-services-reader",
-      "Bash(npx -y @netlify/mcp@latest --site-id c3e9d2cc-7000-4cc4-9afc-ff1b0430c2c4 --proxy-path \"https://netlify-mcp.netlify.app/proxy/eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..OjV1a2NUqEMhInWe.mIaEWz0CeGCYXmcSnCfPgfQ9s_Z68DgiptbyKImnLG7oPqCHK2tAj184kVZn8HTq4J3bjb7IV9vxo-LzDNgs-AMuRt9NI1fKnEABFvZ_oYUGYSLrC8RBdQIRcRBw1wppZYuPaGE42MoJm3e0RMgM3MrcSRDq-_4SstE0tWiWGzld3xNGFjLywnGKS7xFepkoMe2ITu7b-SVs6O8Kd4SbcllC3Uk6EvKrI1I6d4DEfIcLWC_syd7H4iz2Si0kauRQDDvC7Lh90AzJlEgRLSfaOHor6M_pX52ekZ_VDOcbqT71HnrU11nDIuNNvfNgCuvGXgshHGU7KH09zvti5jY3qGCxelZcGWI89po-lCrqnRnof8BGeA.uk-Om4mDG3NmYlThWhRnmw\")"
+      "Bash(npx -y @netlify/mcp@latest --site-id c3e9d2cc-7000-4cc4-9afc-ff1b0430c2c4 --proxy-path \"https://netlify-mcp.netlify.app/proxy/eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..OjV1a2NUqEMhInWe.mIaEWz0CeGCYXmcSnCfPgfQ9s_Z68DgiptbyKImnLG7oPqCHK2tAj184kVZn8HTq4J3bjb7IV9vxo-LzDNgs-AMuRt9NI1fKnEABFvZ_oYUGYSLrC8RBdQIRcRBw1wppZYuPaGE42MoJm3e0RMgM3MrcSRDq-_4SstE0tWiWGzld3xNGFjLywnGKS7xFepkoMe2ITu7b-SVs6O8Kd4SbcllC3Uk6EvKrI1I6d4DEfIcLWC_syd7H4iz2Si0kauRQDDvC7Lh90AzJlEgRLSfaOHor6M_pX52ekZ_VDOcbqT71HnrU11nDIuNNvfNgCuvGXgshHGU7KH09zvti5jY3qGCxelZcGWI89po-lCrqnRnof8BGeA.uk-Om4mDG3NmYlThWhRnmw\")",
+      "Bash(npx -y @netlify/mcp@latest --site-id c3e9d2cc-7000-4cc4-9afc-ff1b0430c2c4 --proxy-path \"https://netlify-mcp.netlify.app/proxy/eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..bs_fXc8lmAaqwySt.CYR_AtHoIVdruiH77rjhKZY5kPXbj-JJuFRFqZ1IhV9VDxgnhmY7w9GGZHEzpUvxx5rNHkLMmcAvDQyBjw8OW6lJkPhZ527xeND2O0qrYj7p5RpOPeLHmgMRzEIXn2F98RRfQZ9MvVZSNVP3soKksL7-pauNOpbM4eKsm4UkSUR04Mmambd_zsDPnztDxFrgQQr1Y7oq8gKYLPJegD-Gyww670jTg0VZNFV83mC68MOKTHE5XLBoP5mdI7kzfLu0dzdiaw1TdzIeW-0vEL7_rWgGzTf7SWN_eJBfZ6td8biyGLfPbcrcxqxih7hkArf1ghdabV13yyzpNQtIW5nsIydWorkpdIH3JaJYjQooKPKymau9ag._krHXoCz5FRjjzNIkt7QQA\")",
+      "Bash(where npx *)",
+      "Bash(npx --version)",
+      "WebFetch(domain:reinboudo.com)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\rony1\\\\Desktop\\\\WebSiteBraven\\\\Local\\\\assets\" -Recurse | ForEach-Object { $_.FullName })"
     ]
   }
 }

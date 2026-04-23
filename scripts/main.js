@@ -6,7 +6,7 @@
  * Solo hay que tocar este archivo si quieres agregar una nueva sección.
  */
 
-import { CONTENIDO }                        from './data/content.js';
+import { CONTENIDO }                        from './data/content.js?v=2';
 import { aplicarTema, toggleTema }           from './theme.js';
 import { getMoneda, setMoneda, ciclarMoneda } from './currency.js';
 import { initNav, toggleMenuMobile, cerrarMenuMobile } from './nav.js';
