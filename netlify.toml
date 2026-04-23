@@ -1,33 +1,4 @@
-# netlify.toml — Configuración de Braven Studio para Netlify
-#
-# Netlify lee este archivo automáticamente al hacer deploy.
-# No necesitas tocarlo para uso normal.
-
-[build]
-  command = ""           # sitio estático, sin build
-  publish = "."          # la raíz del proyecto ES el sitio
-
-# ── Headers de seguridad ──────────────────────────────────
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options        = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy        = "strict-origin-when-cross-origin"
-
-# ── Caché para assets estáticos (imágenes, fuentes) ───────
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-# ── Caché para CSS y JS ────────────────────────────────────
-[[headers]]
-  for = "/styles/*"
-  [headers.values]
-    Cache-Control = "public, max-age=86400"
-
-[[headers]]
-  for = "/scripts/*"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

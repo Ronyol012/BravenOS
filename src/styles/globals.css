@@ -1,0 +1,317 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════
+   BRAVEN OS — Design Tokens (from bravenweb.com)
+   ═══════════════════════════════════════════════════════════ */
+@layer base {
+  :root {
+    /* Exact from braven-demo.html */
+    --p:    #f0f1f0;
+    --p2:   #e8e9e7;
+    --w:    #ffffff;
+    --nv:   #12182a;
+    --nv2:  #1d2840;
+    --n40:  rgba(18,24,42,.40);
+    --n20:  rgba(18,24,42,.20);
+    --n10:  rgba(18,24,42,.10);
+    --n05:  rgba(18,24,42,.05);
+    --bl:   #4d78bb;
+    --cr:   #ea6969;
+    --gy:   #5e5d5d;
+    --rule: rgba(18,24,42,.11);
+
+    /* Semantic */
+    --success: #2a9d5c;
+    --warning: #d97706;
+    --danger:  #dc2626;
+    --info:    #4d78bb;
+  }
+
+  .dark {
+    --p:   #0e1117;
+    --p2:  #151b27;
+    --w:   #1a2235;
+    --nv:  #e8eaf0;
+    --nv2: #d0d4e0;
+    --n40: rgba(232,234,240,.40);
+    --n20: rgba(232,234,240,.20);
+    --n10: rgba(232,234,240,.10);
+    --n05: rgba(232,234,240,.05);
+    --gy:  #9a9ba3;
+    --rule:rgba(232,234,240,.11);
+    --bl:  #6a96d4;
+    --cr:  #f08080;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--p);
+    color: var(--nv);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow: hidden;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--n20); }
+
+/* ═══════════════════════════════════════════════════════════
+   BRAVEN COMPONENT CLASSES
+   ═══════════════════════════════════════════════════════════ */
+@layer components {
+
+  /* ── Section index label (from .idx in braven-demo) ──────── */
+  .brv-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--n40);
+    margin-bottom: 20px;
+  }
+  .brv-label::before {
+    content: '';
+    width: 22px;
+    height: 1.5px;
+    background: var(--cr);
+    flex-shrink: 0;
+  }
+
+  /* ── Headings: serif italic + display combo ────────────────── */
+  .brv-h-serif {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    color: var(--nv);
+  }
+  .brv-h-display {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    letter-spacing: -.04em;
+    line-height: .97;
+    color: var(--nv);
+  }
+
+  /* ── Input ────────────────────────────────────────────────── */
+  .brv-input {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--w);
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    color: var(--nv);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .brv-input:focus {
+    border-color: var(--nv);
+    box-shadow: 0 0 0 3px var(--n05);
+  }
+  .brv-input::placeholder { color: var(--n40); }
+
+  /* ── Buttons ──────────────────────────────────────────────── */
+  .brv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: 7px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all .18s;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .brv-btn-navy {
+    background: var(--nv);
+    color: var(--p);
+  }
+  .brv-btn-navy:hover { background: var(--nv2); transform: translateY(-1px); }
+
+  .brv-btn-coral {
+    background: var(--cr);
+    color: #fff;
+  }
+  .brv-btn-coral:hover { background: #e05d5d; transform: translateY(-1px); }
+
+  .brv-btn-ghost {
+    background: transparent;
+    color: var(--n40);
+    border: 1px solid var(--rule);
+  }
+  .brv-btn-ghost:hover {
+    background: var(--n05);
+    color: var(--nv);
+    border-color: var(--n20);
+  }
+
+  .brv-btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 5px;
+  }
+
+  /* ── Card ──────────────────────────────────────────────────── */
+  .brv-card {
+    background: var(--w);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 24px;
+    transition: background .2s;
+  }
+  .brv-card:hover { background: var(--w); }
+
+  /* ── KPI Card ──────────────────────────────────────────────── */
+  .brv-kpi {
+    background: var(--w);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 20px 22px;
+    transition: border-color .2s;
+  }
+  .brv-kpi:hover { border-color: var(--n20); }
+
+  /* ── Badge / Chip ──────────────────────────────────────────── */
+  .brv-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    background: var(--n05);
+    color: var(--n40);
+    border: 1px solid var(--rule);
+  }
+
+  /* ── Nav item ──────────────────────────────────────────────── */
+  .brv-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--n40);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    transition: color .14s, background .14s;
+    margin-bottom: 1px;
+    text-decoration: none;
+  }
+  .brv-nav-item:hover {
+    color: var(--nv);
+    background: var(--n05);
+  }
+  .brv-nav-item.active {
+    color: var(--nv);
+    background: var(--n05);
+    font-weight: 700;
+  }
+  .brv-nav-item.active .nav-dot-accent {
+    background: var(--cr);
+  }
+
+  /* ── Table ─────────────────────────────────────────────────── */
+  .brv-table { width: 100%; border-collapse: collapse; }
+  .brv-table th {
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--n40);
+    border-bottom: 1px solid var(--rule);
+  }
+  .brv-table td {
+    padding: 11px 12px;
+    font-size: 13px;
+    color: var(--gy);
+    border-bottom: 1px solid var(--rule);
+  }
+  .brv-table tbody tr { transition: background .12s; }
+  .brv-table tbody tr:hover td { background: var(--n05); }
+  .brv-table tbody tr:last-child td { border-bottom: none; }
+  .brv-table td:first-child { color: var(--nv); font-weight: 600; }
+
+  /* ── Progress ──────────────────────────────────────────────── */
+  .brv-prog-track {
+    height: 3px;
+    background: var(--n10);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .brv-prog-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width .5s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ── Logo mark (from braven-demo: navy bg + coral dot) ─────── */
+  .brv-logo-mark {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    background: var(--nv);
+    border-radius: 7px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .brv-logo-mark::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background: var(--cr);
+    border-radius: 50% 0 0 0;
+  }
+
+  /* ── Divider rule ─────────────────────────────────────────── */
+  .brv-rule { border: none; border-top: 1px solid var(--rule); margin: 0; }
+}
+
+@layer utilities {
+  .font-serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+  .text-navy  { color: var(--nv); }
+  .text-coral { color: var(--cr); }
+  .text-blue  { color: var(--bl); }
+  .text-muted { color: var(--n40); }
+  .text-gray  { color: var(--gy); }
+  .bg-surface { background: var(--w); }
+  .bg-page    { background: var(--p); }
+  .bg-page2   { background: var(--p2); }
+  .border-rule{ border-color: var(--rule); }
+}
