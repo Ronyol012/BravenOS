@@ -5,7 +5,14 @@
       "Bash(npx serve:*)",
       "Bash(npm list:*)",
       "Bash(curl -s http://localhost:3000/)",
-      "mcp__5d456e37-d484-4aae-b890-f9b66ea8e899__use_figma"
+      "mcp__5d456e37-d484-4aae-b890-f9b66ea8e899__use_figma",
+      "mcp__09c02a88-dbb3-4d7a-8f9c-2bc0cbc60678__netlify-project-services-reader",
+      "mcp__09c02a88-dbb3-4d7a-8f9c-2bc0cbc60678__netlify-deploy-services-updater",
+      "Bash(npx -y @netlify/mcp@latest --site-id c3e9d2cc-7000-4cc4-9afc-ff1b0430c2c4 --proxy-path \"https://netlify-mcp.netlify.app/proxy/eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..TgvQb7V_M9rg63rf.IS_lTftLbNr4SMc5rjB0EHEoNT7W7RZMngWu8ksONaPuGoP5esjGd50BpsqnRLB0L14FNZ9GHd9JQS1KnXuCq0DlYyKkgQng87y65HGZGQicCHTElWBDNHfUTvfSVydQemt2WzXiRP1iekOTogTL2y80hXCRo10PCKWNskKPaCQt3Tukykb2DbMVEJ_3g6Noe_hmlFgPhEWIBWPqlTJg0Tz9cFvPIEvxMK0z-3QI93zs37YoGP7_i8kM5kGve52Ajp6Ye3q6rMNDQEZlcQ1_XSl6Fn-bw5RtySpyq9REkFNbX8GXsYdcWuHRATVKagGj-985C7GDNqIIyRUE1wFn6UJiV4p9zvIPQJ9AuoKI5pnOuSZe4w.6LC8--Sfl_Jcr6eppoUIpg\")",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(timeout 90 bash -c 'for i in {1..9}; do sleep 10; echo \"Checking... ${i}0s\"; done')",
+      "mcp__09c02a88-dbb3-4d7a-8f9c-2bc0cbc60678__netlify-deploy-services-reader",
+      "Bash(npx -y @netlify/mcp@latest --site-id c3e9d2cc-7000-4cc4-9afc-ff1b0430c2c4 --proxy-path \"https://netlify-mcp.netlify.app/proxy/eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..OjV1a2NUqEMhInWe.mIaEWz0CeGCYXmcSnCfPgfQ9s_Z68DgiptbyKImnLG7oPqCHK2tAj184kVZn8HTq4J3bjb7IV9vxo-LzDNgs-AMuRt9NI1fKnEABFvZ_oYUGYSLrC8RBdQIRcRBw1wppZYuPaGE42MoJm3e0RMgM3MrcSRDq-_4SstE0tWiWGzld3xNGFjLywnGKS7xFepkoMe2ITu7b-SVs6O8Kd4SbcllC3Uk6EvKrI1I6d4DEfIcLWC_syd7H4iz2Si0kauRQDDvC7Lh90AzJlEgRLSfaOHor6M_pX52ekZ_VDOcbqT71HnrU11nDIuNNvfNgCuvGXgshHGU7KH09zvti5jY3qGCxelZcGWI89po-lCrqnRnof8BGeA.uk-Om4mDG3NmYlThWhRnmw\")"
     ]
   }
 }

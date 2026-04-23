@@ -7,10 +7,10 @@
 
 /* ── Precios de los planes (en DOP) ──────────────────────── */
 export const PRECIOS = {
-  'BRV-01': 9000,
-  'BRV-02': 12000,
-  'BRV-03': 18000,
-  'BRV-04': 28000,
+  'BRV-01': 11000,
+  'BRV-02': 15000,
+  'BRV-03': 25000,
+  'BRV-04': 38000,
 };
 
 /* ── Mantenimiento mensual (en DOP) ──────────────────────── */
@@ -37,7 +37,7 @@ export const SIMBOLOS = {
 
 /* ── Contacto ─────────────────────────────────────────────── */
 export const WA_NUMERO  = '18298052619';
-export const EMAIL      = 'bravenweb@gmail.com';
+export const EMAIL      = ' web@bravenweb.com';
 export const DOMINIO    = 'https://bravenweb.com';
 
 /* ── Mensaje pre-llenado para WhatsApp ───────────────────── */
