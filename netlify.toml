@@ -4,6 +4,7 @@
 # No necesitas tocarlo para uso normal.
 
 [build]
+  command = ""           # sitio estático, sin build
   publish = "."          # la raíz del proyecto ES el sitio
 
 # ── Headers de seguridad ──────────────────────────────────
